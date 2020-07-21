@@ -14,6 +14,7 @@ export default class Login extends Component {
               <div className="form-color d-flex flex-column align-items-center">
                 <h3>Log in</h3>
                 <div>
+                  <label htmlFor="user"> Username:</label>
                   <input
                     className="m-3"
                     type="text"
@@ -22,6 +23,7 @@ export default class Login extends Component {
                   ></input>
                 </div>
                 <div>
+                  <label htmlFor="user"> Password: </label>
                   <input className="m-3" type="pass" name="pass"></input>
                 </div>
 
