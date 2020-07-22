@@ -7,7 +7,7 @@ import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ScrollToTop from "./components/ScrollToTop";
-
+import Movie from "./components/Movie";
 const Page404 = ({ location }) => (
   <div className="not-found">
     <h1>404 ERROR</h1>
@@ -24,6 +24,7 @@ const Page404 = ({ location }) => (
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Switch>
         <Route exact path="/">
           <Navbar></Navbar>
@@ -37,6 +38,9 @@ function App() {
         <Route exact path="/signup">
           <Navbar></Navbar>
           <Signup></Signup>
+        </Route>
+        <Route exact path="/movie">
+          <Movie></Movie>
         </Route>
         <Route component={Page404} />
       </Switch>
