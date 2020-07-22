@@ -40,6 +40,7 @@ function App() {
           <Signup></Signup>
         </Route>
         <Route exact path="/movie">
+          <Navbar></Navbar>
           <Movie></Movie>
         </Route>
         <Route component={Page404} />
