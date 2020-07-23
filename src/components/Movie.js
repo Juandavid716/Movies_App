@@ -1,17 +1,33 @@
 import React, { Component } from "react";
 import ReactStars from "react-rating-stars-component";
-// const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
+const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "http://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
   state = { movie: [], rating: 0, name: "" };
 
   getMovie(name) {
-    fetch(API_KEY_TYPE + name)
+    fetch(API_KEY + name)
       .then((response) => response.json())
       .then((data) => {
         this.setState({
-          movie: [data],
+          movie: data.Search,
         });
+      });
+  }
+
+  seeRating(e) {
+    console.log();
+    let name = e.target.value;
+
+    fetch(API_KEY_TYPE + name)
+      .then((response) => response.json())
+      .then((info) => {
+        if (info.Ratings !== undefined) {
+          console.log(info.Ratings[0].Value);
+        } else {
+          console.log("NOT FOUND");
+        }
+        // this.setState({rating: info.Ratings[0].Value.substr(0, 3)})
       });
   }
   searchMovie() {
@@ -34,13 +50,21 @@ export default class Movie extends Component {
           />
           <ReactStars
             count={10}
-            value={movie.Ratings[0].Value.substr(0, 3)}
+            value={3}
             size={24}
             activeColor="#ffd700"
             edit={false}
           />
           ,<h5 className="card-title">{movie.Title}</h5>
           <p className="card-text">{movie.Year}</p>
+          <button
+            type="button"
+            class="btn btn-success"
+            onClick={this.seeRating.bind(movie.Title)}
+            value={movie.Title}
+          >
+            See Rating
+          </button>
         </div>
       );
     });
