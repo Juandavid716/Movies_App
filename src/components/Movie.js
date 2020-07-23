@@ -18,6 +18,18 @@ export default class Movie extends Component {
 
   seeRating(e) {
     console.log();
+  }
+  searchMovie() {
+    this.setState({ movie: [] });
+    this.getMovie(this.state.name);
+  }
+  ratingChanged = () => {
+    this.setState({
+      openRating: !this.state.openRating,
+    });
+  };
+
+  toggleNewRating(e) {
     let name = e.target.value;
 
     fetch(API_KEY_TYPE + name)
@@ -28,23 +40,12 @@ export default class Movie extends Component {
         } else {
           console.log("NOT FOUND");
         }
-        // this.setState({rating: info.Ratings[0].Value.substr(0, 3)})
+        this.setState({
+          rating: info.Ratings[0].Value.substr(0, 3),
+          openRating: !this.state.openRating,
+          movieTitle: name,
+        });
       });
-  }
-  searchMovie() {
-    this.setState({ movie: [] });
-    this.getMovie(this.state.name);
-  }
-  ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
-
-  toggleNewRating(e) {
-    let nameMovie = e.target.value;
-    this.setState({
-      openRating: !this.state.openRating,
-      movieTitle: nameMovie,
-    });
   }
 
   render() {
@@ -60,13 +61,6 @@ export default class Movie extends Component {
             className="card-img-top"
             alt="..."
             style={{ width: "145px" }}
-          />
-          <ReactStars
-            count={10}
-            value={3}
-            size={24}
-            activeColor="#ffd700"
-            edit={false}
           />
           ,<h5 className="card-title">{movie.Title}</h5>
           <p className="card-text">{movie.Year}</p>
@@ -109,15 +103,20 @@ export default class Movie extends Component {
                 isOpen={this.state.openRating}
                 toggle={this.toggleNewRating.bind(this)}
               >
-                <ModalHeader toggle={this.toggleNewRating.bind(this)}>
-                  Modal title
+                <ModalHeader toggle={this.ratingChanged.bind(this)}>
+                  <h2>{this.state.movieTitle}</h2>
                 </ModalHeader>
-                <ModalBody>{this.state.movieTitle}</ModalBody>
-                <ModalFooter>
-                  <Button color="primary" onClick={this.seeRating.bind(this)}>
-                    Do Something
-                  </Button>{" "}
-                </ModalFooter>
+                <ModalBody>
+                  <h4>Imdb Puntuation</h4>
+                  <ReactStars
+                    count={10}
+                    value={this.state.rating}
+                    size={24}
+                    activeColor="#ffd700"
+                    edit={false}
+                  />
+                  {this.state.rating}
+                </ModalBody>
               </Modal>
             </div>
           </div>
