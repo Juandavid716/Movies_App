@@ -28,7 +28,7 @@ export default class Login extends Component {
                 </div>
 
                 <div>
-                  <button type="button" class="btn btn-success">
+                  <button type="button" className="btn btn-success">
                     Log in
                   </button>
                 </div>

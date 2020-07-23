@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import ReactStars from "react-rating-stars-component";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "http://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
-  state = { movie: [], rating: 0, name: "" };
+  state = { movie: [], rating: 0, name: "", openRating: false, movieTitle: "" };
 
   getMovie(name) {
     fetch(API_KEY + name)
@@ -38,10 +39,22 @@ export default class Movie extends Component {
     console.log(newRating);
   };
 
+  toggleNewRating(e) {
+    let nameMovie = e.target.value;
+    this.setState({
+      openRating: !this.state.openRating,
+      movieTitle: nameMovie,
+    });
+  }
+
   render() {
     let movies = this.state.movie.map((movie) => {
       return (
-        <div className="card-body" style={{ width: "145px" }}>
+        <div
+          className="card-body"
+          style={{ width: "145px" }}
+          key={movie.Title + movie.Year}
+        >
           <img
             src={movie.Poster}
             className="card-img-top"
@@ -60,7 +73,8 @@ export default class Movie extends Component {
           <button
             type="button"
             class="btn btn-success"
-            onClick={this.seeRating.bind(movie.Title)}
+            onClick={this.toggleNewRating.bind(this)}
+            //this.seeRating.bind(movie.Title)
             value={movie.Title}
           >
             See Rating
@@ -86,15 +100,29 @@ export default class Movie extends Component {
               ></input>
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 onClick={this.searchMovie.bind(this)}
               >
                 Search
               </button>
+              <Modal
+                isOpen={this.state.openRating}
+                toggle={this.toggleNewRating.bind(this)}
+              >
+                <ModalHeader toggle={this.toggleNewRating.bind(this)}>
+                  Modal title
+                </ModalHeader>
+                <ModalBody>{this.state.movieTitle}</ModalBody>
+                <ModalFooter>
+                  <Button color="primary" onClick={this.seeRating.bind(this)}>
+                    Do Something
+                  </Button>{" "}
+                </ModalFooter>
+              </Modal>
             </div>
           </div>
         </div>
-        <div className="">
+        <div>
           <div className=" d-flex flex-row">{movies}</div>
         </div>
       </div>

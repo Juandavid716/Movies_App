@@ -28,7 +28,7 @@ export default class Registro extends Component {
                 </div>
 
                 <div>
-                  <button type="button" class="btn btn-dark">
+                  <button type="button" className="btn btn-dark">
                     Sign up
                   </button>
                 </div>
