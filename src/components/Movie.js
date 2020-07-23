@@ -1,21 +1,27 @@
 import React, { Component } from "react";
-const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
+import ReactStars from "react-rating-stars-component";
+// const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
+const API_KEY_TYPE = "http://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
-  state = { movie: [], name: "" };
+  state = { movie: [], rating: 0, name: "" };
 
-  getMovies(name) {
-    fetch(API_KEY + name)
+  getMovie(name) {
+    fetch(API_KEY_TYPE + name)
       .then((response) => response.json())
-      .then((data) =>
+      .then((data) => {
         this.setState({
-          movie: data.Search,
-        })
-      );
+          movie: [data],
+        });
+      });
   }
   searchMovie() {
     this.setState({ movie: [] });
-    this.getMovies(this.state.name);
+    this.getMovie(this.state.name);
   }
+  ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+
   render() {
     let movies = this.state.movie.map((movie) => {
       return (
@@ -26,7 +32,14 @@ export default class Movie extends Component {
             alt="..."
             style={{ width: "145px" }}
           />
-          <h5 className="card-title">{movie.Title}</h5>
+          <ReactStars
+            count={10}
+            value={movie.Ratings[0].Value.substr(0, 3)}
+            size={24}
+            activeColor="#ffd700"
+            edit={false}
+          />
+          ,<h5 className="card-title">{movie.Title}</h5>
           <p className="card-text">{movie.Year}</p>
         </div>
       );
