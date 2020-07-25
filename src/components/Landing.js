@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Carousel from "./Carousel";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=Life+is+beautiful";
+const API_KEY = "https://www.omdbapi.com/?apikey=4a5c0a67&s=Life+is+beautiful";
 export default class Landing extends Component {
   state = {
     img: "",
