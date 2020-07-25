@@ -141,7 +141,7 @@ export default class Movie extends Component {
           </div>
         </div>
         <div className="row m-3 d-flex align-items-center justify-content-center">
-          <div className="col-sm">
+          <div className="col-7">
             <div className="d-flex flex-wrap">{movies}</div>
           </div>
         </div>
