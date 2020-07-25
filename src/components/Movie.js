@@ -81,67 +81,69 @@ export default class Movie extends Component {
             alt="..."
             style={{ width: "145px" }}
           />
-          ,<h5 className="card-title">{movie.Title}</h5>
+          <h5 className="card-title">{movie.Title}</h5>
           <p className="card-text">{movie.Year}</p>
-          <button
-            type="button"
-            class="btn btn-success"
-            onClick={this.toggleNewRating.bind(this)}
-            //this.seeRating.bind(movie.Title)
-            value={movie.Title}
-          >
-            See Rating
-          </button>
+          <div className="d-flex align-items-end flex-grow-1">
+            <button
+              type="button"
+              class="btn btn-success"
+              onClick={this.toggleNewRating.bind(this)}
+              //this.seeRating.bind(movie.Title)
+              value={movie.Title}
+            >
+              See Rating
+            </button>
+          </div>
         </div>
       );
     });
     return (
       <div className="container-fluid">
-        <div className="row m-3 d-flex align-items-center justify-content-center">
-          <div className="input-search ">
-            <div>
-              <h2>Search movie</h2>
-              <input
-                className="m-3"
-                type="text"
-                name="search"
-                value={this.state.name}
-                onChange={(e) => {
-                  let findWord = e.target.value;
-                  this.setState({ name: findWord });
-                }}
-              ></input>
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={this.searchMovie.bind(this)}
-              >
-                Search
-              </button>
-              <Modal
-                isOpen={this.state.openRating}
-                toggle={this.toggleNewRating.bind(this)}
-              >
-                <ModalHeader toggle={this.ratingChanged.bind(this)}>
-                  <h2>{this.state.movieTitle}</h2>
-                </ModalHeader>
-                <ModalBody>
-                  <h4>Imdb Puntuation</h4>
-                  <ReactStars
-                    count={10}
-                    value={this.state.rating}
-                    size={24}
-                    activeColor="#ffd700"
-                    edit={false}
-                  />
-                  {this.state.rating}
-                </ModalBody>
-              </Modal>
-            </div>
+        <div className="input-search body-content">
+          <div>
+            <h2>Search movie</h2>
+            <input
+              className="m-3"
+              type="text"
+              name="search"
+              value={this.state.name}
+              onChange={(e) => {
+                let findWord = e.target.value;
+                this.setState({ name: findWord });
+              }}
+            ></input>
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={this.searchMovie.bind(this)}
+            >
+              Search
+            </button>
+            <Modal
+              isOpen={this.state.openRating}
+              toggle={this.toggleNewRating.bind(this)}
+            >
+              <ModalHeader toggle={this.ratingChanged.bind(this)}>
+                <h2>{this.state.movieTitle}</h2>
+              </ModalHeader>
+              <ModalBody>
+                <h4>Imdb Puntuation</h4>
+                <ReactStars
+                  count={10}
+                  value={this.state.rating}
+                  size={24}
+                  activeColor="#ffd700"
+                  edit={false}
+                />
+                {this.state.rating}
+              </ModalBody>
+            </Modal>
           </div>
         </div>
-        <div>
-          <div className=" d-flex flex-row">{movies}</div>
+        <div className="row m-3 d-flex align-items-center justify-content-center">
+          <div className="col-sm">
+            <div className="d-flex flex-wrap">{movies}</div>
+          </div>
         </div>
       </div>
     );
