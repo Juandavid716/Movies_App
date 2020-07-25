@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactStars from "react-rating-stars-component";
 import Swal from "sweetalert2";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "http://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
@@ -11,7 +11,7 @@ export default class Movie extends Component {
     fetch(API_KEY + name)
       .then((response) => response.json())
       .then((data) => {
-        if (data.Search == undefined) {
+        if (data.Search === undefined) {
           Swal.fire({
             title: "Error!",
             text: "Movie not found",

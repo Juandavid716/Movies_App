@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Carousel from "./Carousel";
-import { Button } from "reactstrap";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=Life+is+beautiful";
