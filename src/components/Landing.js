@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Carousel from "./Carousel";
-
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=Life+is+beautiful";
 export default class Landing extends Component {
@@ -60,16 +60,17 @@ export default class Landing extends Component {
               <h1 className="white">Welcome to MoviesApp!</h1>
               <p className="white">Enjoy of all our movies in this website. </p>
               <div className="flex-row">
-                <a
-                  href="/login"
+                <Link
                   className="btn btn-success m-3 white"
                   color="secondary"
+                  to="/login"
                 >
                   Get Started
-                </a>{" "}
-                <a href="#movies" className="btn btn-dark m-3 white">
+                </Link>
+
+                <Link to="#movies" className="btn btn-dark m-3 white">
                   See Movies
-                </a>
+                </Link>
               </div>
             </div>
           </div>

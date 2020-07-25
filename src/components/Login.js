@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 export default class Login extends Component {
   render() {
     return (
@@ -28,9 +28,9 @@ export default class Login extends Component {
                 </div>
 
                 <div>
-                  <button type="button" className="btn btn-success ">
-                    Log in
-                  </button>
+                  <Link to="/movie" className="btn btn-dark m-3 white">
+                    See Movies
+                  </Link>
                 </div>
               </div>
             </form>
