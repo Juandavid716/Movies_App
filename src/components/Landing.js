@@ -58,24 +58,24 @@ export default class Landing extends Component {
           <div className="col-sm body-content ">
             {" "}
             <div className="col-sm body-content ">
-              <h1>Welcome to MoviesApp!</h1>
-              <p>Enjoy of all our movies in this website. </p>
+              <h1 className="white">Welcome to MoviesApp!</h1>
+              <p className="white">Enjoy of all our movies in this website. </p>
               <div className="flex-row">
                 <a
                   href="/login"
-                  className="btn btn-success m-3"
+                  className="btn btn-success m-3 white"
                   color="secondary"
                 >
                   Get Started
                 </a>{" "}
-                <a href="#movies" className="btn btn-dark m-3">
+                <a href="#movies" className="btn btn-dark m-3 white">
                   See Movies
                 </a>
               </div>
             </div>
           </div>
           <div id="movies">
-            <h1> Movies</h1>
+            <h1 className="white"> Movies</h1>
             <Carousel></Carousel>
           </div>
         </div>

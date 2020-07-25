@@ -16,7 +16,7 @@ export default class Login extends Component {
                 <div>
                   <label htmlFor="user"> Username:</label>
                   <input
-                    className="m-3"
+                    className="m-3 "
                     type="text"
                     name="user"
                     placeholder="username.."
@@ -24,11 +24,11 @@ export default class Login extends Component {
                 </div>
                 <div>
                   <label htmlFor="user"> Password: </label>
-                  <input className="m-3" type="pass" name="pass"></input>
+                  <input className="m-3 white" type="pass" name="pass"></input>
                 </div>
 
                 <div>
-                  <button type="button" className="btn btn-success">
+                  <button type="button" className="btn btn-success ">
                     Log in
                   </button>
                 </div>

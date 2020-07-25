@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default class Navigation extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark white">
         <div className="container">
           <Link className="navbar-brand" to="/">
             MoviesApp

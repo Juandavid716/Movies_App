@@ -1,6 +1,7 @@
 .modal-backdrop {
   background-color: green;
 }
+
 .body-content {
   display: flex;
   flex-direction: column;
