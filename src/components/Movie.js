@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactStars from "react-rating-stars-component";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
+import Swal from "sweetalert2";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "http://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
@@ -10,9 +11,18 @@ export default class Movie extends Component {
     fetch(API_KEY + name)
       .then((response) => response.json())
       .then((data) => {
-        this.setState({
-          movie: data.Search,
-        });
+        if (data.Search == undefined) {
+          Swal.fire({
+            title: "Error!",
+            text: "Movie not found",
+            icon: "error",
+            confirmButtonText: "Accept",
+          });
+        } else {
+          this.setState({
+            movie: data.Search,
+          });
+        }
       });
   }
 
@@ -21,7 +31,16 @@ export default class Movie extends Component {
   }
   searchMovie() {
     this.setState({ movie: [] });
-    this.getMovie(this.state.name);
+    if (this.state.name === "") {
+      Swal.fire({
+        title: "Error!",
+        text: " Write the name of a movie ",
+        icon: "error",
+        confirmButtonText: "Accept",
+      });
+    } else {
+      this.getMovie(this.state.name);
+    }
   }
   ratingChanged = () => {
     this.setState({
