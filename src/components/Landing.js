@@ -25,32 +25,33 @@ export default class Landing extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row mt-2" style={{ height: "800px" }}>
+        <div className="row mt-2" style={{ height: "900px" }}>
           <div className="col-sm ">
             <div className="card-body">
               <img
                 src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
                 className="card-img-top"
                 alt="..."
-                style={{ width: "145px" }}
+                style={{ width: "130px" }}
               />
 
-              <div></div>
+              <h5>The Godfather </h5>
             </div>
             <div className="card-body body-content">
               <img
                 src="https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg"
                 className="card-img-top"
                 alt="..."
-                style={{ width: "145px" }}
+                style={{ width: "130px" }}
               />
+              <h5>John Wick </h5>
             </div>
             <div className="card-body body-content-x">
               <img
                 src="https://m.media-amazon.com/images/M/MV5BYmJmM2Q4NmMtYThmNC00ZjRlLWEyZmItZTIwOTBlZDQ3NTQ1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
                 className="card-img-top"
                 alt="..."
-                style={{ width: "145px" }}
+                style={{ width: "130px" }}
               />
             </div>
           </div>
@@ -60,15 +61,20 @@ export default class Landing extends Component {
               <h1>Welcome to MoviesApp!</h1>
               <p>Enjoy of all our movies in this website. </p>
               <div className="flex-row">
-                <Button color="secondary">Get Started</Button>{" "}
-                <button type="button" className="btn btn-success m-3">
+                <a
+                  href="/login"
+                  className="btn btn-success m-3"
+                  color="secondary"
+                >
+                  Get Started
+                </a>{" "}
+                <a href="#movies" className="btn btn-dark m-3">
                   See Movies
-                </button>
+                </a>
               </div>
             </div>
-            <div className="col-sm body-content "></div>
           </div>
-          <div>
+          <div id="movies">
             <h1> Movies</h1>
             <Carousel></Carousel>
           </div>
