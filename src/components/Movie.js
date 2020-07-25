@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactStars from "react-rating-stars-component";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody } from "reactstrap";
 const API_KEY = "http://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "http://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {

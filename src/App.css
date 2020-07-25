@@ -1,3 +1,15 @@
 .modal-backdrop {
   background-color: green;
 }
+.body-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.body-content-x {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+}
