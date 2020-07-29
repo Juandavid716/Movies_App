@@ -75,7 +75,7 @@ export default class Landing extends Component {
             </div>
           </div>
           <div id="movies">
-            <h1 className="white"> Movies</h1>
+            <h1 className="white ml-2"> Movies</h1>
             <Carousel></Carousel>
           </div>
         </div>

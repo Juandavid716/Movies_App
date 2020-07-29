@@ -1,42 +1,68 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-export default class Login extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div
-          className="row d-flex align-items-center "
-          style={{ height: "800px" }}
-        >
-          {" "}
-          <div className="col-sm">
-            <form className=" d-flex  align-items-center justify-content-center ">
-              <div className="form-color d-flex flex-column align-items-center">
-                <h3>Log in</h3>
-                <div>
-                  <label htmlFor="user"> Username:</label>
-                  <input
-                    className="m-3 "
-                    type="text"
-                    name="user"
-                    placeholder="username.."
-                  ></input>
-                </div>
-                <div>
-                  <label htmlFor="user"> Password: </label>
-                  <input className="m-3 white" type="pass" name="pass"></input>
-                </div>
+import React, { useEffect, useContext, useState } from "react";
+import { Center, Form, H1, WrappLogin, Input, Button } from "./styles";
+import AuthGlobal from "../context/store/AuthGlobal";
+import { loginUser } from "../context/actions/autentication.action";
+import Error from "../components/Error";
 
-                <div>
-                  <Link to="/movie" className="btn btn-dark m-3 white">
-                    See Movies
-                  </Link>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+export default function Login(props) {
+  const context = useContext(AuthGlobal);
+  const [correo, setcorreo] = useState("");
+  const [clave, setclave] = useState("");
+  const [error, seterror] = useState("");
+  const [showChild, setShowChild] = useState(false);
+
+  useEffect(() => {
+    if (context.stateUser.isAuthenticated === true) {
+      props.history.push("/");
+    }
+    setShowChild(true);
+  }, [context.stateUser.isAuthenticated, props.history]);
+
+  const handleSubmit = (e) => {
+    const user = {
+      correo,
+      clave,
+    };
+    if (correo === "" || clave === "") {
+      seterror("Ingrese datos correctamente");
+    } else {
+      loginUser(user, context.dispatch, seterror);
+    }
+
+    e.preventDefault();
+  };
+
+  if (!showChild) {
+    return null;
+  } else {
+    return (
+      <Center>
+        <Form onSubmit={handleSubmit}>
+          <H1>Login</H1>
+          <WrappLogin>
+            <Input
+              placeholder="Ingrese Usuario"
+              onChange={(e) => setcorreo(e.target.value)}
+              id="correo"
+              name="correo"
+              value={correo}
+              autoComplete="off"
+            />
+            <Input
+              type="password"
+              placeholder="Ingrese Clave"
+              onChange={(e) => setclave(e.target.value)}
+              id="clave"
+              name="clave"
+              value={clave}
+            />
+            <br />
+
+            <Button type="submit">Ingresar</Button>
+            {error ? <Error mensaje={error} /> : null}
+          </WrappLogin>
+        </Form>
+      </Center>
     );
   }
 }
