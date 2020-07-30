@@ -13,7 +13,7 @@ export default function Login(props) {
 
   useEffect(() => {
     if (context.stateUser.isAuthenticated === true) {
-      props.history.push("/");
+      props.history.push("/dash");
     }
     setShowChild(true);
   }, [context.stateUser.isAuthenticated, props.history]);

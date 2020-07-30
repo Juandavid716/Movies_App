@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import Header from "./Header";
+import Movie from "./Movie";
 import AuthGlobal from "../context/store/AuthGlobal";
 import { Table, Tbody, Thead, Td, Th } from "./styles";
 
@@ -13,7 +13,7 @@ export default function Dashboard(props) {
       context.stateUser.isAuthenticated === false ||
       context.stateUser.isAuthenticated === null
     ) {
-      props.history.push("/login");
+      props.history.push("/");
     }
     setShowChild(true);
 
@@ -40,30 +40,6 @@ export default function Dashboard(props) {
   if (!showChild) {
     return null;
   } else {
-    return (
-      <div>
-        <Header />
-        {usuarios ? (
-          <Table>
-            <Thead>
-              <tr>
-                <Th>Nombre</Th>
-                <Th>Correo</Th>
-              </tr>
-            </Thead>
-            <Tbody>
-              {usuarios.map((usuario, index) => {
-                return (
-                  <tr key={index}>
-                    <Td>{usuario.nombre}</Td>
-                    <Td>{usuario.correo}</Td>
-                  </tr>
-                );
-              })}
-            </Tbody>
-          </Table>
-        ) : null}
-      </div>
-    );
+    return <Movie></Movie>;
   }
 }

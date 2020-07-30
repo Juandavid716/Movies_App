@@ -2,8 +2,8 @@ import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import Navbar from "./components/Navigation";
-// import Landing from "./components/Landing";
+import Navbar from "./components/Navigation";
+import Landing from "./components/Landing";
 import Login from "./components/Login";
 // import Signup from "./components/Signup";
 // import ScrollToTop from "./components/ScrollToTop";
@@ -29,7 +29,14 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/" component={Dashboard} />
+          <Route path="/dash">
+            <Navbar></Navbar>
+            <Dashboard></Dashboard>
+          </Route>
+          <Route path="/">
+            <Navbar></Navbar>
+            <Landing></Landing>
+          </Route>
         </Switch>
       </BrowserRouter>
     </Auth>
