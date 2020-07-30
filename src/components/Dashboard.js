@@ -1,19 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import Movie from "./Movie";
 import AuthGlobal from "../context/store/AuthGlobal";
-import { Table, Tbody, Thead, Td, Th } from "./styles";
 
 export default function Dashboard(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
-  const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
     if (
       context.stateUser.isAuthenticated === false ||
       context.stateUser.isAuthenticated === null
     ) {
-      props.history.push("/");
+      props.history.push("/login");
     }
     setShowChild(true);
 
@@ -26,14 +24,7 @@ export default function Dashboard(props) {
           "Content-Type": "application/json",
           Authorization: jwt,
         },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setUsuarios(data.usuarios);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      }).then((res) => res.json());
     }
   }, [context.stateUser.isAuthenticated, props.history]);
 

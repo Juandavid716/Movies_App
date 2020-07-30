@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import Carousel from "./Carousel";
-import AuthGlobal from "../context/store/AuthGlobal";
+
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 

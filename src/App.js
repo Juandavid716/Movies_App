@@ -29,13 +29,13 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/dash">
-            <Navbar></Navbar>
-            <Dashboard></Dashboard>
-          </Route>
           <Route path="/">
             <Navbar></Navbar>
             <Landing></Landing>
+          </Route>
+          <Route path="/dash">
+            <Navbar></Navbar>
+            <Dashboard></Dashboard>
           </Route>
         </Switch>
       </BrowserRouter>
