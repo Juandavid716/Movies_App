@@ -16,6 +16,9 @@ export default function Navigation(props) {
     setlogOut(false);
     logoutUser(context.dispatch);
   };
+  const redirectFun = () => {
+    props.history.push("/movies");
+  };
   if (!showChild) {
     return null;
   } else {
@@ -30,6 +33,13 @@ export default function Navigation(props) {
 
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    {" "}
+                    <Link className="nav-link " to="/movies">
+                      {" "}
+                      My Movies{" "}
+                    </Link>
+                  </li>{" "}
                   <li className="nav-item">
                     {" "}
                     <Link onClick={closeSession} className="nav-link " to="/">

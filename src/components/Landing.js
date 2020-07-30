@@ -62,13 +62,13 @@ export default function Landing(props) {
                 Get Started
               </Link>
 
-              <Link to="#movies" className="btn btn-dark m-3 white">
+              <a href="#movies-app" className="btn btn-dark m-3 white">
                 See Movies
-              </Link>
+              </a>
             </div>
           </div>
         </div>
-        <div id="movies">
+        <div id="movies-app">
           <h1 className="white ml-2"> Movies</h1>
           <Carousel></Carousel>
         </div>

@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navigation";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
+import MovieList from "./components/MoviesList";
 // import Signup from "./components/Signup";
 // import ScrollToTop from "./components/ScrollToTop";
 // import Movie from "./components/Movie";
@@ -27,16 +28,15 @@ function App() {
   return (
     <Auth>
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/">
-            <Navbar></Navbar>
-            <Landing></Landing>
-          </Route>
-          <Route path="/dash">
-            <Navbar></Navbar>
-            <Dashboard></Dashboard>
-          </Route>
+
+          <Route path="/search" component={Dashboard} />
+          {/* <Navbar></Navbar > */}
+          {/* <Dashboard></Dashboard> */}
+          <Route path="/movies" component={MovieList} />
+          <Route path="/" component={Landing} />
         </Switch>
       </BrowserRouter>
     </Auth>

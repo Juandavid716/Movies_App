@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import Movie from "./Movie";
+
 import AuthGlobal from "../context/store/AuthGlobal";
 
-export default function Dashboard(props) {
+export default function MoviesList(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
 
@@ -12,6 +12,8 @@ export default function Dashboard(props) {
       context.stateUser.isAuthenticated === null
     ) {
       props.history.push("/");
+    } else {
+      props.history.push("/movies");
     }
     setShowChild(true);
 
@@ -31,6 +33,10 @@ export default function Dashboard(props) {
   if (!showChild) {
     return null;
   } else {
-    return <Movie></Movie>;
+    return (
+      <div>
+        <h3> My Movies List</h3>
+      </div>
+    );
   }
 }
