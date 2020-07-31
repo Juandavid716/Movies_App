@@ -75,18 +75,27 @@ export default class Movie extends Component {
           style={{ width: "145px" }}
           key={movie.Title + movie.Year}
         >
-          <img
-            src={movie.Poster}
-            className="card-img-top"
-            alt="..."
-            style={{ width: "145px" }}
-          />
+          <div className="container-movie">
+            <img
+              src={movie.Poster}
+              className="card-img-top"
+              alt="..."
+              style={{ width: "145px" }}
+            />
+            <button type="button" className="btn " value={movie.Title}>
+              <img
+                src="https://img.icons8.com/fluent/48/000000/add.png"
+                alt="Add to Fav movies"
+              />
+            </button>
+          </div>
+
           <h5 className="card-title">{movie.Title}</h5>
           <p className="card-text">{movie.Year}</p>
           <div className="d-flex align-items-end flex-grow-1">
             <button
               type="button"
-              class="btn btn-success"
+              className="btn btn-success"
               onClick={this.toggleNewRating.bind(this)}
               //this.seeRating.bind(movie.Title)
               value={movie.Title}
