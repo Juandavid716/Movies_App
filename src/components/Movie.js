@@ -1,11 +1,52 @@
 import React, { Component } from "react";
 import ReactStars from "react-rating-stars-component";
 import Swal from "sweetalert2";
+import axios from "axios";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 const API_KEY = "https://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "https://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
-  state = { movie: [], rating: 0, name: "", openRating: false, movieTitle: "" };
+  state = {
+    movie: [],
+    rating: 0,
+    name: "",
+    openRating: false,
+    movieTitle: "",
+    year: "",
+  };
+  async addMovie(e) {
+    let name = e.target.name;
+    fetch(API_KEY_TYPE + name)
+      .then((response) => response.json())
+      .then((data) => {
+        let ratingSelected = 0;
+        if (data.Ratings !== undefined) {
+          ratingSelected = data.Ratings[0].Value.substr(0, 3);
+        }
+        let movie = {
+          title: data.Title,
+          year: data.Year,
+          rating: ratingSelected,
+          poster: data.Poster,
+          content: "  ",
+          titlecomment: "  ",
+        };
+
+        axios.post("http://localhost:3001/server/movies", movie);
+      });
+    // movieSelected.Year,
+    // movieSelected.Ratings[0].Value.substr(0, 3)
+    // const movie = {
+    //   title: this.state.title,
+    //   content: this.state.content,
+    //   author: this.state.userSelected,
+    //   date: this.state.date,
+    // };
+    // await axios.put(
+    //   "http://localhost:3001/server/movies/" + this.state._id,
+    //   updatedNote
+    // );
+  }
 
   getMovie(name) {
     fetch(API_KEY + name)
@@ -27,7 +68,7 @@ export default class Movie extends Component {
   }
 
   seeRating(e) {
-    console.log();
+    console.log(e.target.value);
   }
   searchMovie() {
     this.setState({ movie: [] });
@@ -82,11 +123,14 @@ export default class Movie extends Component {
               alt="..."
               style={{ width: "145px" }}
             />
-            <button type="button" className="btn " value={movie.Title}>
+
+            <button type="button" className="btn btn-img">
               <img
                 src="https://img.icons8.com/fluent/48/000000/add.png"
-                alt="Add to Fav movies"
-              />
+                value={movie.Title}
+                name={movie.Title}
+                onClick={this.addMovie.bind(this)}
+              ></img>
             </button>
           </div>
 
