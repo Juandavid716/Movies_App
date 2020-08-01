@@ -24,7 +24,8 @@ h2,
 label,
 p,
 h3,
-span {
+span,
+h6 {
   color: white;
 }
 

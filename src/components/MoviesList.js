@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import AuthGlobal from "../context/store/AuthGlobal";
-
+import ReactStars from "react-rating-stars-component";
 export default function MoviesList(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
@@ -61,6 +61,21 @@ export default function MoviesList(props) {
               <h3> Comments </h3>
               <h5>{mov["titlecomment"]}</h5>
               <p>{mov["content"]}</p>
+              <h6> Rating </h6>
+              <ReactStars
+                count={10}
+                value={mov["rating"]}
+                size={24}
+                activeColor="#ffd700"
+                edit={false}
+              />
+              <button
+                className="btn btn-success m-3 white"
+                color="secondary"
+                to="/login"
+              >
+                Comment
+              </button>
             </div>
           </div>
         ))}
