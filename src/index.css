@@ -23,7 +23,8 @@ h5,
 h2,
 label,
 p,
-h3 {
+h3,
+span {
   color: white;
 }
 

@@ -34,18 +34,6 @@ export default class Movie extends Component {
 
         axios.post("http://localhost:3001/server/movies", movie);
       });
-    // movieSelected.Year,
-    // movieSelected.Ratings[0].Value.substr(0, 3)
-    // const movie = {
-    //   title: this.state.title,
-    //   content: this.state.content,
-    //   author: this.state.userSelected,
-    //   date: this.state.date,
-    // };
-    // await axios.put(
-    //   "http://localhost:3001/server/movies/" + this.state._id,
-    //   updatedNote
-    // );
   }
 
   getMovie(name) {
@@ -129,6 +117,7 @@ export default class Movie extends Component {
                 src="https://img.icons8.com/fluent/48/000000/add.png"
                 value={movie.Title}
                 name={movie.Title}
+                alt={movie.Title}
                 onClick={this.addMovie.bind(this)}
               ></img>
             </button>
