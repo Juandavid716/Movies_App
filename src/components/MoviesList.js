@@ -46,30 +46,29 @@ export default function MoviesList(props) {
         <div className="row">
           <div className="col">
             {movie.map((mov) => (
-              <div
-                className="card-body"
-                style={{ width: "145px" }}
-                key={mov["title"] + mov["year"]}
-              >
-                <div className="">
-                  <img
-                    src={mov["poster"]}
-                    className="card-img-top"
-                    alt="..."
-                    style={{ width: "145px" }}
-                  />
-                </div>
+              <div className="d-flex flex-row w-100">
+                <div
+                  className="d-flex flex-row  w-100 "
+                  key={mov["title"] + mov["year"]}
+                >
+                  <div className=" card-body w-50 ">
+                    {" "}
+                    <img
+                      src={mov["poster"]}
+                      className="card-img-top"
+                      alt="..."
+                      style={{ width: "145px" }}
+                    />
+                    <h5 className="card-title">{mov["title"]}</h5>
+                    <p className="card-text">{mov["year"]}</p>
+                  </div>
 
-                <h5 className="card-title">{mov["title"]}</h5>
-                <p className="card-text">{mov["year"]}</p>
-              </div>
-            ))}
-          </div>
-          <div className="col">
-            {movie.map((mov) => (
-              <div className style={{ width: "145px" }}>
-                <h3> Comments </h3>
-                <p>{mov["content"]}</p>
+                  <div className="">
+                    <h3> Comments </h3>
+                    <h5>{mov["titlecomment"]}</h5>
+                    <p>{mov["content"]}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
