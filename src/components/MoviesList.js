@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-
 import AuthGlobal from "../context/store/AuthGlobal";
 import ReactStars from "react-rating-stars-component";
 export default function MoviesList(props) {
@@ -32,12 +31,13 @@ export default function MoviesList(props) {
 
   useEffect(() => {
     async function fetchData() {
+      console.log(context.stateUser.user.usuariobd._id);
       const res = await fetch("http://localhost:3001/server/movies");
       res.json().then((res) => setMovie(res.movies));
     }
 
     fetchData();
-  }, []);
+  }, [context]);
   if (!showChild) {
     return null;
   } else {
