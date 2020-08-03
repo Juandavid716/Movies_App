@@ -39,8 +39,11 @@ export default function MoviesList(props) {
         // const result = res.movies["userSelected"].filter(
         //   (user) => user === userID
         // );
-        console.log(res.movies.map((mov) => mov["userSelected"]));
-        setMovie(res.movies);
+        const movID = res.movies.filter(
+          (mov) => mov["userSelected"] === userID
+        );
+
+        setMovie(movID);
       });
     }
 
