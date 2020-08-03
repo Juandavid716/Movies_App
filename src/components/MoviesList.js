@@ -1,11 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthGlobal from "../context/store/AuthGlobal";
 import ReactStars from "react-rating-stars-component";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  Input,
+} from "reactstrap";
 import axios from "axios";
+
 export default function MoviesList(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
   const [movie, setMovie] = useState([]);
+  const [comment, setNewComment] = useState(false);
+  // const [rating, setRating] = useState(0);
+
   useEffect(() => {
     if (
       context.stateUser.isAuthenticated === false ||
@@ -33,12 +46,9 @@ export default function MoviesList(props) {
   useEffect(() => {
     async function fetchData() {
       let userID = context.stateUser.user.usuariobd._id;
-      console.log();
+
       const res = await fetch("http://localhost:3001/server/movies");
       res.json().then((res) => {
-        // const result = res.movies["userSelected"].filter(
-        //   (user) => user === userID
-        // );
         const movID = res.movies.filter(
           (mov) => mov["userSelected"] === userID
         );
@@ -50,8 +60,29 @@ export default function MoviesList(props) {
     fetchData();
   }, [context]);
 
+  async function getMovie() {
+    let userID = context.stateUser.user.usuariobd._id;
+
+    const res = await fetch("http://localhost:3001/server/movies");
+    res.json().then((res) => {
+      const movID = res.movies.filter((mov) => mov["userSelected"] === userID);
+
+      setMovie(movID);
+    });
+  }
+
+  function toggleNewComment() {
+    setNewComment(!comment);
+  }
+
+  // function toggleCloseComment() {
+  //   console.log("holas");
+  //   setCommentClosed(!commentClose);
+  // }
+
   async function deleteMovie(id) {
     await axios.delete("http://localhost:3001/server/movies/" + id);
+    getMovie();
   }
   if (!showChild) {
     return null;
@@ -73,15 +104,18 @@ export default function MoviesList(props) {
             </div>
 
             <div className="col-6">
-              <h3> Comments </h3>
-              <button
-                className="btn btn-danger m-3 white"
-                color=""
-                value={mov["_id"]}
-                onClick={(e) => deleteMovie(e.target.value)}
-              >
-                Delete
-              </button>
+              <div className="title d-flex flex-row justify-content-between">
+                <h3> Comments </h3>
+                <button
+                  className="btn btn-danger m-3 white"
+                  color=""
+                  value={mov["_id"]}
+                  onClick={(e) => deleteMovie(e.target.value)}
+                >
+                  Delete
+                </button>{" "}
+              </div>
+
               <h5>{mov["titlecomment"]}</h5>
               <p>{mov["content"]}</p>
               <h6> Rating </h6>
@@ -96,12 +130,47 @@ export default function MoviesList(props) {
                 className="btn btn-success m-3 white"
                 color="secondary"
                 to="/login"
+                onClick={toggleNewComment}
               >
                 Comment
               </button>
             </div>
           </div>
         ))}
+        <Modal isOpen={comment} toggle={toggleNewComment.bind(this)}>
+          <ModalHeader toggle={toggleNewComment.bind(this)}>
+            Modal title
+          </ModalHeader>
+          <ModalBody>
+            <Label className="specialLabel" for="title">
+              Title
+            </Label>
+            <Input type="title"> </Input>
+            <Label className="specialLabel" for="content">
+              Content
+            </Label>
+            <Input
+              type="textarea"
+              placeholder="Write something (data should remain in modal if unmountOnClose is set to false)"
+              rows={5}
+            />
+            <Label className="specialLabel" for="rating">
+              Rating
+            </Label>
+            <ReactStars
+              count={10}
+              size={24}
+              activeColor="#ffd700"
+              edit={true}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary">Add Book</Button>{" "}
+            <Button onClick={toggleNewComment.bind(this)} color="secondary">
+              Cancel
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }

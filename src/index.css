@@ -28,7 +28,9 @@ span,
 h6 {
   color: white;
 }
-
+.specialLabel {
+  color: black;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
