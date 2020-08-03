@@ -31,6 +31,6 @@ export default function Dashboard(props) {
   if (!showChild) {
     return null;
   } else {
-    return <Movie></Movie>;
+    return <Movie userID={context.stateUser.user.usuariobd._id}></Movie>;
   }
 }

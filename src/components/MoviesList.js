@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import AuthGlobal from "../context/store/AuthGlobal";
 import ReactStars from "react-rating-stars-component";
+import axios from "axios";
 export default function MoviesList(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
@@ -31,13 +32,24 @@ export default function MoviesList(props) {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(context.stateUser.user.usuariobd._id);
+      let userID = context.stateUser.user.usuariobd._id;
+      console.log();
       const res = await fetch("http://localhost:3001/server/movies");
-      res.json().then((res) => setMovie(res.movies));
+      res.json().then((res) => {
+        // const result = res.movies["userSelected"].filter(
+        //   (user) => user === userID
+        // );
+        console.log(res.movies.map((mov) => mov["userSelected"]));
+        setMovie(res.movies);
+      });
     }
 
     fetchData();
   }, [context]);
+
+  async function deleteMovie(id) {
+    await axios.delete("http://localhost:3001/server/movies/" + id);
+  }
   if (!showChild) {
     return null;
   } else {
@@ -59,6 +71,14 @@ export default function MoviesList(props) {
 
             <div className="col-6">
               <h3> Comments </h3>
+              <button
+                className="btn btn-danger m-3 white"
+                color=""
+                value={mov["_id"]}
+                onClick={(e) => deleteMovie(e.target.value)}
+              >
+                Delete
+              </button>
               <h5>{mov["titlecomment"]}</h5>
               <p>{mov["content"]}</p>
               <h6> Rating </h6>

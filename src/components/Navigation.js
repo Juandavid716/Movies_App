@@ -40,18 +40,18 @@ export default function Navigation(props) {
                   </li>{" "}
                   <li className="nav-item">
                     {" "}
+                    <Link className="nav-link " to="/search">
+                      {" "}
+                      Search{" "}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    {" "}
                     <Link onClick={closeSession} className="nav-link " to="/">
                       {" "}
                       Log Out{" "}
                     </Link>
                   </li>{" "}
-                  <li className="nav-item">
-                    {" "}
-                    <Link className="nav-link " to="/signup">
-                      {" "}
-                      Sign up{" "}
-                    </Link>
-                  </li>
                 </ul>
               </div>
             </div>

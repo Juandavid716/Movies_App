@@ -6,14 +6,19 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 const API_KEY = "https://www.omdbapi.com/?apikey=4a5c0a67&s=";
 const API_KEY_TYPE = "https://www.omdbapi.com/?apikey=4a5c0a67&t=";
 export default class Movie extends Component {
-  state = {
-    movie: [],
-    rating: 0,
-    name: "",
-    openRating: false,
-    movieTitle: "",
-    year: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      movie: [],
+      rating: 0,
+      name: "",
+      openRating: false,
+      movieTitle: "",
+      year: "",
+      user: props.userID,
+    };
+  }
+
   async addMovie(e) {
     let name = e.target.name;
     fetch(API_KEY_TYPE + name)
@@ -23,6 +28,7 @@ export default class Movie extends Component {
         if (data.Ratings !== undefined) {
           ratingSelected = data.Ratings[0].Value.substr(0, 3);
         }
+
         let movie = {
           title: data.Title,
           year: data.Year,
@@ -30,9 +36,16 @@ export default class Movie extends Component {
           poster: data.Poster,
           content: "  ",
           titlecomment: "  ",
+          userSelected: this.state.user,
         };
 
         axios.post("http://localhost:3001/server/movies", movie);
+        Swal.fire({
+          title: "Movie added!",
+          text: " The movie has been added to MovieList ",
+          icon: "success",
+          confirmButtonText: "Accept",
+        });
       });
   }
 
