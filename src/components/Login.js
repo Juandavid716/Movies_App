@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Center, Form, H1, WrappLogin, Input, Button } from "./styles";
+import { Form, Input, Button } from "reactstrap";
 import AuthGlobal from "../context/store/AuthGlobal";
 import { loginUser } from "../context/actions/autentication.action";
 import Error from "../components/Error";
@@ -36,33 +36,33 @@ export default function Login(props) {
     return null;
   } else {
     return (
-      <Center>
-        <Form onSubmit={handleSubmit}>
-          <H1>Login</H1>
-          <WrappLogin>
-            <Input
-              placeholder="Ingrese Usuario"
-              onChange={(e) => setcorreo(e.target.value)}
-              id="correo"
-              name="correo"
-              value={correo}
-              autoComplete="off"
-            />
-            <Input
-              type="password"
-              placeholder="Ingrese Clave"
-              onChange={(e) => setclave(e.target.value)}
-              id="clave"
-              name="clave"
-              value={clave}
-            />
-            <br />
+      <div className="center-form">
+        <Form className="loginForm" onSubmit={handleSubmit}>
+          <h1 id="title-login">Login </h1>
 
-            <Button type="submit">Ingresar</Button>
-            {error ? <Error mensaje={error} /> : null}
-          </WrappLogin>
+          <Input
+            placeholder="Ingrese Usuario"
+            onChange={(e) => setcorreo(e.target.value)}
+            id="correo"
+            name="correo"
+            value={correo}
+            autoComplete="on"
+          />
+          <Input
+            type="password"
+            placeholder="Ingrese Clave"
+            onChange={(e) => setclave(e.target.value)}
+            id="clave"
+            name="clave"
+            value={clave}
+            autoComplete="off"
+          />
+          <br />
+
+          <Button type="submit">Ingresar</Button>
+          {error ? <Error mensaje={error} /> : null}
         </Form>
-      </Center>
+      </div>
     );
   }
 }

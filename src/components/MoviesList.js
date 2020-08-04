@@ -17,8 +17,11 @@ export default function MoviesList(props) {
   const [showChild, setShowChild] = useState(false);
   const [movie, setMovie] = useState([]);
   const [comment, setNewComment] = useState(false);
-  // const [rating, setRating] = useState(0);
-
+  const [rating, setRating] = useState(0);
+  const [ratingComment, setRatingComment] = useState(0);
+  const [content, setContent] = useState("");
+  const [titlecomment, setTitle] = useState("");
+  const [movieID, setMovieID] = useState("");
   useEffect(() => {
     if (
       context.stateUser.isAuthenticated === false ||
@@ -54,6 +57,7 @@ export default function MoviesList(props) {
         );
 
         setMovie(movID);
+        console.log(movID);
       });
     }
 
@@ -71,14 +75,28 @@ export default function MoviesList(props) {
     });
   }
 
-  function toggleNewComment() {
+  async function toggleNewComment() {
     setNewComment(!comment);
   }
+  async function toggleNewCritic() {
+    const updateMovie = { titlecomment, content, rating };
+    await axios.put(
+      "http://localhost:3001/server/movies/" + movieID,
+      updateMovie
+    );
+    await getMovie();
+    setNewComment(!comment);
+  }
+  async function getMovieID(id) {
+    const movie = await axios.get("http://localhost:3001/server/movies/" + id);
 
-  // function toggleCloseComment() {
-  //   console.log("holas");
-  //   setCommentClosed(!commentClose);
-  // }
+    setTitle(movie.data["titlecomment"]);
+    setContent(movie.data["content"]);
+    setRatingComment(movie.data["rating"]);
+    setMovieID(id);
+
+    toggleNewComment();
+  }
 
   async function deleteMovie(id) {
     await axios.delete("http://localhost:3001/server/movies/" + id);
@@ -108,7 +126,6 @@ export default function MoviesList(props) {
                 <h3> Comments </h3>
                 <button
                   className="btn btn-danger m-3 white"
-                  color=""
                   value={mov["_id"]}
                   onClick={(e) => deleteMovie(e.target.value)}
                 >
@@ -130,7 +147,8 @@ export default function MoviesList(props) {
                 className="btn btn-success m-3 white"
                 color="secondary"
                 to="/login"
-                onClick={toggleNewComment}
+                onClick={(e) => getMovieID(e.target.value)}
+                value={mov["_id"]}
               >
                 Comment
               </button>
@@ -145,7 +163,11 @@ export default function MoviesList(props) {
             <Label className="specialLabel" for="title">
               Title
             </Label>
-            <Input type="title"> </Input>
+            <Input
+              type="title"
+              value={titlecomment}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <Label className="specialLabel" for="content">
               Content
             </Label>
@@ -153,6 +175,8 @@ export default function MoviesList(props) {
               type="textarea"
               placeholder="Write something (data should remain in modal if unmountOnClose is set to false)"
               rows={5}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
             <Label className="specialLabel" for="rating">
               Rating
@@ -160,12 +184,15 @@ export default function MoviesList(props) {
             <ReactStars
               count={10}
               size={24}
+              value={ratingComment}
               activeColor="#ffd700"
-              edit={true}
+              onChange={(e) => setRating(e)}
             />
           </ModalBody>
           <ModalFooter>
-            <Button color="primary">Add Book</Button>{" "}
+            <Button onClick={toggleNewCritic.bind(this)} color="primary">
+              Add comment
+            </Button>{" "}
             <Button onClick={toggleNewComment.bind(this)} color="secondary">
               Cancel
             </Button>
