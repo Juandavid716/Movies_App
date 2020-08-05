@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthGlobal from "../context/store/AuthGlobal";
-import { logoutUser } from "../context/actions/autentication.action";
+import { logoutUser, loginUser } from "../context/actions/autentication.action";
 export default function Navigation(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
@@ -23,23 +23,32 @@ export default function Navigation(props) {
     return (
       <div>
         {logOut && (
-          <nav className="navbar navbar-expand-lg navbar-dark white">
+          <nav class="navbar navbar-expand-lg navbar-dark white">
             <div className="container">
               <Link className="navbar-brand" to="/">
                 MoviesApp
               </Link>
-
-              <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    {" "}
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active"></li>
+                  <li class="nav-item">
                     <Link className="nav-link " to="/movies">
                       {" "}
                       My Movies{" "}
                     </Link>
-                  </li>{" "}
-                  <li className="nav-item">
-                    {" "}
+                  </li>
+                  <li class="nav-item">
                     <Link className="nav-link " to="/search">
                       {" "}
                       Search{" "}
@@ -58,14 +67,25 @@ export default function Navigation(props) {
           </nav>
         )}{" "}
         {!logOut && (
-          <nav className="navbar navbar-expand-lg navbar-dark white">
+          <nav class="navbar navbar-expand-lg navbar-dark white">
             <div className="container">
               <Link className="navbar-brand" to="/">
                 MoviesApp
               </Link>
-
-              <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav ml-auto">
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active"></li>
                   <li className="nav-item">
                     {" "}
                     <Link className="nav-link " to="/login">
@@ -73,8 +93,7 @@ export default function Navigation(props) {
                       Log in{" "}
                     </Link>
                   </li>{" "}
-                  <li className="nav-item">
-                    {" "}
+                  <li class="nav-item">
                     <Link className="nav-link " to="/signup">
                       {" "}
                       Sign up{" "}

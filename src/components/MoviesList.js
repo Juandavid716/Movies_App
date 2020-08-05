@@ -48,16 +48,21 @@ export default function MoviesList(props) {
 
   useEffect(() => {
     async function fetchData() {
-      let userID = context.stateUser.user.usuariobd._id;
+      if (
+        !context.stateUser.isAuthenticated === false ||
+        !context.stateUser.isAuthenticated === null
+      ) {
+        let userID = context.stateUser.user.usuariobd._id;
 
-      const res = await fetch("http://localhost:3001/server/movies");
-      res.json().then((res) => {
-        const movID = res.movies.filter(
-          (mov) => mov["userSelected"] === userID
-        );
+        const res = await fetch("http://localhost:3001/server/movies");
+        res.json().then((res) => {
+          const movID = res.movies.filter(
+            (mov) => mov["userSelected"] === userID
+          );
 
-        setMovie(movID);
-      });
+          setMovie(movID);
+        });
+      }
     }
 
     fetchData();
@@ -125,7 +130,7 @@ export default function MoviesList(props) {
             </div>
 
             <div className="col-6">
-              <div className="title d-flex flex-row justify-content-between">
+              <div className=" d-md-flex flex-row justify-content-between comment-section">
                 <h3> Comments </h3>
                 <button
                   className="btn btn-danger m-3 white"

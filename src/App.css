@@ -77,3 +77,11 @@
   align-items: center;
   height: 100vh;
 }
+
+@media only screen and (max-width: 600px) {
+  .comment-section {
+    display: unset;
+    flex-direction: unset;
+    justify-content: unset;
+  }
+}
