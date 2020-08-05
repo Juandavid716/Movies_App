@@ -18,7 +18,7 @@ export default function MoviesList(props) {
   const [movie, setMovie] = useState([]);
   const [comment, setNewComment] = useState(false);
   const [rating, setRating] = useState(0);
-  const [ratingComment, setRatingComment] = useState(0);
+
   const [content, setContent] = useState("");
   const [titlecomment, setTitle] = useState("");
   const [movieID, setMovieID] = useState("");
@@ -57,13 +57,14 @@ export default function MoviesList(props) {
         );
 
         setMovie(movID);
-        console.log(movID);
       });
     }
 
     fetchData();
   }, [context]);
-
+  const ratingChanged = (newRating) => {
+    setRating(newRating);
+  };
   async function getMovie() {
     let userID = context.stateUser.user.usuariobd._id;
 
@@ -80,20 +81,22 @@ export default function MoviesList(props) {
   }
   async function toggleNewCritic() {
     const updateMovie = { titlecomment, content, rating };
+
     await axios.put(
       "http://localhost:3001/server/movies/" + movieID,
       updateMovie
     );
-    await getMovie();
+
     setNewComment(!comment);
+    window.location.reload();
   }
   async function getMovieID(id) {
+    setMovieID(id);
     const movie = await axios.get("http://localhost:3001/server/movies/" + id);
 
     setTitle(movie.data["titlecomment"]);
     setContent(movie.data["content"]);
-    setRatingComment(movie.data["rating"]);
-    setMovieID(id);
+    setRating(movie.data["rating"]);
 
     toggleNewComment();
   }
@@ -184,9 +187,9 @@ export default function MoviesList(props) {
             <ReactStars
               count={10}
               size={24}
-              value={ratingComment}
+              value={rating}
               activeColor="#ffd700"
-              onChange={(e) => setRating(e)}
+              onChange={ratingChanged}
             />
           </ModalBody>
           <ModalFooter>

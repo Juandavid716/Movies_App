@@ -6,7 +6,7 @@ import Navbar from "./components/Navigation";
 import Landing from "./components/Landing";
 import Login from "./components/Login";
 import MovieList from "./components/MoviesList";
-// import Signup from "./components/Signup";
+import Signup from "./components/Signup";
 // import ScrollToTop from "./components/ScrollToTop";
 // import Movie from "./components/Movie";
 import Auth from "./context/store/Auth";
@@ -36,6 +36,7 @@ function App() {
           {/* <Navbar></Navbar > */}
           {/* <Dashboard></Dashboard> */}
           <Route path="/movies" component={MovieList} />
+          <Route path="/signup" component={Signup} />
           <Route path="/" component={Landing} />
         </Switch>
       </BrowserRouter>
