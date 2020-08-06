@@ -18,7 +18,7 @@
 
 - Search.
 - Rate.
-- Personalized lists.
+- Customize lists.
 
 ## Creadores
 
