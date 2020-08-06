@@ -30,14 +30,14 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route exact path="/login" component={Login} />
 
-          <Route path="/search" component={Dashboard} />
+          <Route exact path="/search" component={Dashboard} />
           {/* <Navbar></Navbar > */}
           {/* <Dashboard></Dashboard> */}
-          <Route path="/movies" component={MovieList} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/" component={Landing} />
+          <Route exact path="/movies" component={MovieList} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/" component={Landing} />
         </Switch>
       </BrowserRouter>
     </Auth>
