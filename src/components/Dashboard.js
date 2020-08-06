@@ -17,7 +17,7 @@ export default function Dashboard(props) {
 
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      fetch("http://localhost:3001/server/usuarios", {
+      fetch("https://moviesbackendcol.herokuapp.com/server/usuarios", {
         method: "GET",
         headers: {
           Accept: "application/json",

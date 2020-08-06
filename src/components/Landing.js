@@ -4,17 +4,6 @@ import Carousel from "./Carousel";
 import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-// const API_KEY = "https://www.omdbapi.com/?apikey=4a5c0a67&s=Life+is+beautiful";
-// function getMovie() {
-//   fetch(API_KEY)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       console.log(data.Search[0].Poster);
-//       this.setState({
-//         img: data.Search[0].Poster,
-//       });
-//     });
-// }
 export default function Landing(props) {
   return (
     <div className="container">

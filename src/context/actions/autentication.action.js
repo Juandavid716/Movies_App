@@ -3,7 +3,7 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 export const loginUser = (user, dispatch, seterror) => {
   //login
-  fetch("http://localhost:3001/server/login", {
+  fetch("https://moviesbackendcol.herokuapp.com/server/login", {
     method: "POST",
     body: JSON.stringify(user),
     headers: {

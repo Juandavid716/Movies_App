@@ -28,7 +28,10 @@ export default function Signup(props) {
     if (correo === "" || clave === "" || nombre === "") {
       seterror("Ingrese datos correctamente");
     } else {
-      axios.post("http://localhost:3001/server/usuarios", user);
+      axios.post(
+        "https://moviesbackendcol.herokuapp.com/server/usuarios",
+        user
+      );
       Swal.fire({
         title: "User created!",
         text: " The user has been created successfully ",

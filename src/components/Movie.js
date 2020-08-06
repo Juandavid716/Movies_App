@@ -39,7 +39,10 @@ export default class Movie extends Component {
           userSelected: this.state.user,
         };
 
-        axios.post("http://localhost:3001/server/movies", movie);
+        axios.post(
+          "https://moviesbackendcol.herokuapp.com/server/movies",
+          movie
+        );
         Swal.fire({
           title: "Movie added!",
           text: " The movie has been added to MovieList ",

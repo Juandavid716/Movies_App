@@ -18,7 +18,6 @@ export default function MoviesList(props) {
   const [movie, setMovie] = useState([]);
   const [comment, setNewComment] = useState(false);
   const [rating, setRating] = useState(0);
-
   const [content, setContent] = useState("");
   const [titlecomment, setTitle] = useState("");
   const [movieID, setMovieID] = useState("");
@@ -35,7 +34,7 @@ export default function MoviesList(props) {
 
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      fetch("http://localhost:3001/server/usuarios", {
+      fetch("https://moviesbackendcol.herokuapp.com/server/usuarios", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -54,7 +53,9 @@ export default function MoviesList(props) {
       ) {
         let userID = context.stateUser.user.usuariobd._id;
 
-        const res = await fetch("http://localhost:3001/server/movies");
+        const res = await fetch(
+          "https://moviesbackendcol.herokuapp.com/server/movies"
+        );
         res.json().then((res) => {
           const movID = res.movies.filter(
             (mov) => mov["userSelected"] === userID
@@ -73,7 +74,9 @@ export default function MoviesList(props) {
   async function getMovie() {
     let userID = context.stateUser.user.usuariobd._id;
 
-    const res = await fetch("http://localhost:3001/server/movies");
+    const res = await fetch(
+      "https://moviesbackendcol.herokuapp.com/server/movies"
+    );
     res.json().then((res) => {
       const movID = res.movies.filter((mov) => mov["userSelected"] === userID);
 
@@ -88,7 +91,7 @@ export default function MoviesList(props) {
     const updateMovie = { titlecomment, content, rating };
 
     await axios.put(
-      "http://localhost:3001/server/movies/" + movieID,
+      "https://moviesbackendcol.herokuapp.com/server/movies/" + movieID,
       updateMovie
     );
 
@@ -97,7 +100,9 @@ export default function MoviesList(props) {
   }
   async function getMovieID(id) {
     setMovieID(id);
-    const movie = await axios.get("http://localhost:3001/server/movies/" + id);
+    const movie = await axios.get(
+      "https://moviesbackendcol.herokuapp.com/server/movies/" + id
+    );
 
     setTitle(movie.data["titlecomment"]);
     setContent(movie.data["content"]);
@@ -107,7 +112,9 @@ export default function MoviesList(props) {
   }
 
   async function deleteMovie(id) {
-    await axios.delete("http://localhost:3001/server/movies/" + id);
+    await axios.delete(
+      "https://moviesbackendcol.herokuapp.com/server/movies/" + id
+    );
     getMovie();
   }
   if (!showChild) {

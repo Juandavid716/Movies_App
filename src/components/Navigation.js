@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthGlobal from "../context/store/AuthGlobal";
-import { logoutUser, loginUser } from "../context/actions/autentication.action";
+import { logoutUser } from "../context/actions/autentication.action";
 export default function Navigation(props) {
   const context = useContext(AuthGlobal);
   const [showChild, setShowChild] = useState(false);
