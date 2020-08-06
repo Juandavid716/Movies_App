@@ -20,6 +20,10 @@
 - Rate.
 - Customize lists.
 
+### API
+
+Thanks to <a href="http://www.omdbapi.com/"> OMDB </a> for allowing to use their movies API.
+
 ## Creadores
 
 <table>
